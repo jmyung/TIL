@@ -1,0 +1,112 @@
+InfoQ new Idea
+
+- realm이 1b 유저달성 버젼 1 찍었다고.
+- google big query 의 모든 프로젝트를 깃헙에 오픈
+- redis를 가지고 time-series 데이터 만들기 https://www.infoq.com/articles/redis-time-series
+- mutliple database w/ spring boot example https://www.infoq.com/articles/Multiple-Databases-with-Spring-Boot?utm_source=infoqWeeklyNewsletter&utm_medium=WeeklyNL_EditorialContent_java&utm_campaign=08022016news&utm_content=b
+
+
+- Precision Medicine Modeling Demonstration with SPark on EMR, ADAM, the 1000 Genomes Project..
+	https://www.infoq.com/news/2016/05/spark-precision-medicine-adam
+
+- JINQ 이거슨 새로운 페러다임이구먼. query조차도 sql -> hibernate -> HQL using jOOQ -> jinq
+    https://www.infoq.com/news/2016/03/simple-database-queries-jinq
+This gives the programmer a much higher level of type safety: referring to the wrong field, table or operation will result in a compilation error. However, this code is not as fluid as it could be. Finally, let's se`e how this would be written using the functional approach of Jinq:
+
+List<String> = streams.streamAll(em, City.class)
+        .where(c -> c.getCountry().getCapital().equals(c)
+                && c.getPopulation() > 3000000)
+        .select(c -> c.getCountry().getName())
+        .toList();
+This code is much closer to the typical structures developers may create while working with streams of data, and allows them to retain a functional programming style when writing code. Internally though, despite the appearance of working with streams, Jinq will use a technique called "symbolic execution" to convert the above code into an actual SQL query that the database will be able to optimise.
+
+
+
+
+************************************************************************************************************************************
+- Big Data Processing with Apache Spark - Part 4: Spark Machine Learning  Wow!!!
+  이건 진짜 재미날듯  “Big Data Processing with Apache Spark” series, we have looked at what Apache Spark framework is (Part 1), how to leverage the SQL interface to access data using Spark SQL library (Part 2) and real-time data processing & analytics of streaming data using Spark Streaming (Part 3).
+- 이번에는 spark.mllib smark.ml 가지고 해본다고 하는데...
+   " The spark.mllib package contains the original Spark machine learning API built on Resilient Distributed Datasets (RDDs). It offers machine learning techniques which include correlation, classification and regression, collaborative filtering, clustering, and dimensionality reduction.
+
+
+On the other hand, spark.ml package provides machine learning API built on the DataFrames which are becoming the core part of Spark SQL library. This package can be used for developing and managing the machine learning pipelines. It also provides Feature Extractors, Transformers, Selectors, and machine learning techniques like classification and regression, and clustering."
+
+- ML 기법에는 다음과 같은게 있다고 함.. (http://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/)
+ There are different types of machine learning models like:
+  	* Supervised learning
+  	 -> 하위에는 이 두 녀석..  Regression and Classification.
+	* Unsupervised learning
+	 ->  to find hidden patterns and correlations within the raw data. No training data used in this model, so this technique is based on unlabeled data. Algorithms like k-means and Principle Component Analysis (PCA) fall into this category
+	* Semi-supervised Learning 위의 두 기법 모두에 사용하고 이는 predictive analysics을 위함이다. 라벨과 언라벨 데이터를 트레이닝으로 사용하고 보통 라벨된게 적고 언라벨된게 겁나 양이 많다. classification 이나 regression 같은 머쉰러닝에서 주로 사용한다 
+
+	* Reinforcement learning
+  	-> 이녀석은 다양한 액션과 그이 이끌어낼수 있는 최대 아웃풋을 가지고 학습함으로써 최적의 보상을 얻어낼때 사용한다고 한다. 
+
+		ML model                            Examples
+
+	Supervised Learning               	  Fraud detection
+
+	Unsupervised learning                 Social network applications, language prediction
+
+	Semi-supervised Learning              Image categorization, Voice recognition
+
+	Reinforcement Learning                Artificial Intelligence (AI) applications
+
+그래서 머쉰러닝 알고리즘(https://en.wikipedia.org/wiki/List_of_machine_learning_concepts)에는
+
+Naive Bayes : for classification이며, Bayes thorem과 a set of conditional independence assumptions 에 기반한다고함.
+
+SVM : supervised이며, classes들을 가능한 넓은 여백을 가지면서 경계값을 찾아준다고함.   include bioinformatics, text, and image recognition.
+
+Decision Tree : multi-class classification를 포함하여 ml의 많은 문제에서 사용! basic한것과 tree들을 조합한 ensemble도 가능하며, 앙상블의 앙상블도 가능 Gradient-Boosted Trees와 Random Forest가 대표적인 예
+
+
+위의 내용을 표로 요약하자면,
+ML Model  									Problems							Algorithms				
+Supervised learning      Classification, Regression, Anomaly Detection   Logistic Regression, Back Propagation Neural Network
+
+Unsupervised learning    Clustering, Dimensionality reduction			 k-Means , Apriori algorithm
+
+Semi-Supervised Learning Classification, Regression                      Self training, Semi-supervised Support Vector Machines (S3VMs)
+
+
+ML을 프로그램을 만들기 위해서는 아래의 3단계가 있다.
+training data를 전처리하고 그리고 ML 알고리즘으로  모델에 녹이고 이 모델에 새 데이터를 넣어 prediction이나 bl을 하면 되것죠? 그리고 트레이닝 데이터의 질이 좋아야 하고 그리고 데이터가 너무 적거나 샘플링이 잘못되면 이상한 판단을 내리므로 주의해야한다..
+
+
+Use Cases
+
+The business use cases for machine learning span different domains and scenarios including recommendation engines (food recommendation engine), predictive analytics (stock price prediction or predicting flights delay), targeted advertising, fraud detection, image and video recognition, self-driving cars and various other artificial intelligence.
+
+
+Recommendation Engines! -> 이부분은 나중에 정리한번 다시하자.. 우선 스킵!!
+
+
+Sample Application
+Alternating Least Squares (ALS) machine learning algorithm. 라는 걸 사용해서 추천 시스템 구축 하는 예제!!
+그리고 여기선 영화 평점가지고 하는데 이것의 예측은.. 사용자의 다른 영화들의 친마ㅣㄹ감이나 다른 사용자들의 친밀감?
+
+
+
+
+
+Our program includes the following steps to arrive at the top movie recommendations for the user.
+
+Load movies data file
+Load the data file with ratings provided by a specific user (you)
+Load the ratings data provided by other users (community)
+Join the user ratings data with community ratings into a single RDD
+Train the model using ALS algorithm using ratings data
+Identify the movies not rated by a particular user (userId = 1)
+Predict the ratings of the items not rated by user
+Get top N recommendations (N=5 in our example)
+Display the recommendation data on the console
+
+
+
+
+
+
+
+

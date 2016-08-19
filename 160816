@@ -1,0 +1,45 @@
+
+InfoQ 
+InfoQ 
+npm install -g create-react-app
+create-react-app hello-world
+npm start
+Angular2 https://www.infoq.com/articles/Angular2-TypeScript-High-Level-Overview
+
+
+Deep work 읽어보고 싶네..
+https://www.amazon.com/Deep-Work-Focused-Success-Distracted/dp/1455586692
+
+선데이 스터디 멤버들에게 강추 
+- Python to learn ML
+http://www.kdnuggets.com/2015/11/seven-steps-machine-learning-python.html
+- Data Analysis with SQL
+http://www.kdnuggets.com/2016/08/doing-statistics-sql.html
+- 그리고 나서 classification으로 https://community.topcoder.com/tc?module=MatchDetails&rd=16771 이거 도전해보자.
+
+
+
+
+링크드인이 진로 상담을 자동화하는 특허를 등록했다. 링크드인이 보유한 전세계의 커리어 패스의 데이터를 이용해 가상의 진로 상담가가 최적화된 진로를 제공하는 하는 것이다. Link
+
+일본에서 전문의조차 진단하기 어려워 몇 달간 고전을 면치 못하던 한 환자의 병을 IBM 왓슨(Watson)이 수분 만에 알아내 환자의 생명을 구했다. 해당 환자는 급성 골수성 백혈병을 진단받고 치료를 받고 있었으나 차도가 없는 상태였다. 그런데 IBM 왓슨이 환자의 유전적/의학적 정보를 기존에 학습된 2천만개 가량의 전문 자료 및 사례와 비교 분석한 결과, 기존과 다른 병명을 진단했다. Link
+
+
+
+Bayesian ML
+ Bayesian은 확률적인이라는 말인데 믿음의 측정? 그래서 주관적이며 미래를 언급한다고 한다. Frequentists 드른 다른 뷰를 가지고 있다고 한다. 그들은 과거의 일어난 이벤트를 언급하는데 사용하여 객관적이다
+
+ Priors, updates, and posteriors
+   As Bayesians, we start with a belief, called a prior. Then we obtain some data and use it to update our belief. The outcome is called a posterior. Should we obtain even more data, the old posterior becomes a new prior and the cycle repeats.
+
+	Bayes rule:
+  		P( A | B ) = P( B | A ) * P( A ) / P( B )
+
+Bayesian machine learning we use the Bayes rule to infer model parameters (theta) from data (D):
+
+P( theta | D ) = P( D | theta ) * P( theta ) / P( data )
+
+
+
+Facebook 우승자의 비법은 Bayes's theorem이라고 한다. 
+
