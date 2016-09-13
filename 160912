@@ -1,0 +1,21 @@
+Implementing a highly Scalable Stock Prediction System with R GemFire and Spring XD
+	
+
+Fred Melo
+ - femlo@pivotal.io
+ - wmarkito@pivotal.io 
+
+
+주식 예측 시스템을 코드 별거 없어 오픈소스와 결합하여 만든다고 함.
+
+야후에서 주식 데이터를 가져옴 그리고 이걸 historical db로 담고
+트렌드를 읽고 라이브데이터는 평가한다고 한다.
+
+
+
+
+
+https://www.infoq.com/presentations/graph-fraud-detection?utm_source=infoqWeeklyNewsletter&utm_medium=WeeklyNL_EditorialContent_data-science&utm_campaign=04052016news
+
+
+
