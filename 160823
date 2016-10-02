@@ -1,0 +1,11 @@
+python 으로 네이버 부동산 데이터 크롤링 해오는 소스 짜기
+mysql 으로 db schema 구성하기
+algorithm 문제 2개 풀기
+dg assignemnet 할것
+선데이스터디 일정 조정 ( 목요일, 오후 7시반 내방 고대로!!) -> 그대로
+
+금요일 베페  코엑스 주차요금 확인
+
+lxml-3.6.0-cp27-none-win_amd64.whl
+
+pip install -http-proxy:70.10.15.12:8080 --index-url=http://pypi.python.org/simple/ --trusted-host pypi.python.org lmxl 

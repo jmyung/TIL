@@ -1,0 +1,186 @@
+# 생성 스크립트
+
+use insurance;
+
+drop table insurance.fp;
+create table insurance.fp (
+CLLT_FP_PRNO	NUMERIC,
+INCB_DVSN		CHAR(1),
+ETRS_YM			CHAR(6),
+FIRE_YM			CHAR(6),
+BEFO_JOB			VARCHAR(10),	
+EDGB				VARCHAR(10),
+BRCH_CODE		NUMERIC
+);
+
+
+drop table insurance.cust;
+
+create table insurance.cust (
+	CUST_ID				NUMERIC,
+	DIVIDED_SET 		NUMERIC,
+	SIU_CUST_YN		CHAR(1),
+	SEX					CHAR(1),
+	AGE					NUMERIC,
+	RESI_COST			NUMERIC,
+	RESI_TYPE_CODE	CHAR(2),
+	FP_CAREER			CHAR(1),
+	CUST_RGST			CHAR(6),
+	CTPR					CHAR(4),	
+	OCCP_GRP1			VARCHAR(10),
+	OCCP_GRP2			VARCHAR(10),
+	TOTALPREM			NUMERIC,	
+	MINCRDT				CHAR(2),		
+	MAXCRDT				CHAR(2),	
+	WEDD_YN				CHAR(1),
+	MATE_OCCP_GRP1	VARCHAR(10),
+	MATE_OCCP_GRP2	VARCHAR(10),
+	CHLD_CNT			NUMERIC,	
+	LTBN_CHLD_AGE		NUMERIC,	
+	MAX_PAYM_YM		CHAR(6),
+	MAX_PRM				NUMERIC,
+	CUST_INCM			NUMERIC,
+	RCBASE_HSHD_INCM NUMERIC,
+	JPBASE_HSHD_INCM NUMERIC
+);
+
+
+drop table insurance.fmly;
+
+create table insurance.fmly (
+	CUST_ID 	NUMERIC,
+	SUB_CUST_ID NUMERIC,
+	FMLY_RELN_CODE CHAR(2)
+);
+
+
+drop table insurance.cntt;
+
+create table insurance.cntt (
+POLY_NO NUMERIC COMMENT'증권번호 -->보험계약을 구분하는 고유번호'
+,CUST_ID NUMERIC COMMENT'고객ID -->고객을 구분하는 고유번호'
+,CUST_ROLE NUMERIC COMMENT'고객역할코드 -->계약에 있어 고객의 역할을 구분한 코드 계약자이나 주피보험자는 아님(0) // 계약자이며 주피보험자임(1) 계약자는 아니지만 주피보험자임(2) //주피보험자는 아니지만 피보험자임(21) // 피보험자는 아니지만 생존수익자(3)// 피보험자 및 생존수익자는 아니지만 입원장해수익자(4) // 피보험자는 생존급부의 수익자는 아니지만 사망수익자(5)'
+,IRKD_CODE_DTAL CHAR(4) COMMENT'보종코드_세 -->상품에 부여된 번호'
+,IRKD_CODE_ITEM CHAR(4) COMMENT'보종코드_목 -->상품에 부여된 번호이며 보험료등이 변경되거나 상품이 개정되는 경우 변경됨'
+,GOOD_CLSF_CDNM VARCHAR(10) COMMENT'상품분류 -->해당 상품이 어떠한 분류에 해당하는지를 설명 (총 18가지이며 중복없음)'
+,CNTT_YM CHAR(6) COMMENT'계약체결년월 -->보험계약이 체결된 연월을 6자리로 표기함'
+,CLLT_FP_PRNO VARCHAR(10)  COMMENT'FP사번 -->보험설계사(FP) 또는 내근직원에게 부여되는 고유번호 '
+,REAL_PAYM_TERM NUMERIC COMMENT'실보험료납입기간 -->보험료를 납입하기로 한 기간(년) (0의 경우 일시납//999의 경우 종신납)'
+,SALE_CHNL_CODE CHAR(1) COMMENT '판매채널코드 -->고객이 보험상품을 구매한 채널에 대한 코드, 설계사(1),법인(2),홈페이지(3),전화영업(4),방카슈랑스(5),남성전문조직(6),보험대리점(7)'
+,CNTT_STAT_CODE CHAR(1) COMMENT '계약상태코드 -->계약의 현재상태를 나타내는 코드 유지(1),완납(2),납입면제(3),효력상실(4),만기경과(9) 만기지급(A),해약(B),사망감소( C ),장해감소(D),해지 (E ) 무효(G),정산(H),청약철회(I),반송(J),부활취소(L)'
+,EXPR_YM CHAR(6) COMMENT'만기년월 -->보험기간이 끝나는 연월(종신보험의 경우 999912)'
+,EXTN_YM CHAR(6) COMMENT'소멸년월 -->보험이 소멸한 연월(소멸한 적이 없으면 NULL)'
+,LAPS_YM CHAR(6) COMMENT'실효년월 -->보험이 실효된 연월(실효된 적이 없으면 NULL)'
+,PAYM_CYCL_CODE VARCHAR(2) COMMENT'납입주기코드 -->보험료의 납입주기 코드 (0: 일시납, 1:월납,3:3개월에 한번씩 납입,6:6개월에 한번씩 보험료 납입,12:1년에 한번씩 보험료 납입)'
+,MAIN_INSR_AMT NUMERIC COMMENT'주보험금 -->주계약의 보험금액(단위:원)'
+,SUM_ORIG_PREM NUMERIC COMMENT'합계보험료 -->계약(주계약 + 특약)의 전체 보험료'
+,RECP_PUBL NUMERIC COMMENT'청약서발행_접수소요일 -->보험을 가입하기 위한 청약서를 발행하고 접수하기까지 소요된 기간'
+,CNTT_RECP NUMERIC COMMENT'청약서접수_계약소요일 -->청약서를 접수하고 난 이후 실제 계약기간 까지의 소요된 기간'
+,MNTH_INCM_AMT NUMERIC COMMENT'청약서 소득 -->청약서에 기재한 월소득금액'
+,DISTANCE NUMERIC COMMENT'FP와 고객의거리 -->FP와 고객간 거주지의 거리(단위 : KM)'
+)
+
+
+
+drop table insurance.claim;
+
+create table insurance.claim(
+CUST_ID NUMERIC COMMENT'고객ID  -->고객을 구분하는 고유번호'
+,POLY_NO NUMERIC COMMENT'증권번호  -->청약서번호이면서 동시에 계약성립후에는 증권번호로 사용'
+,ACCI_OCCP_GRP1 VARCHAR(10) COMMENT'직업그룹코드1 -->총 8개직업군으로 분류한 코드(사고 당시)'
+,ACCI_OCCP_GRP2 VARCHAR(10)  COMMENT'직업그룹코드2 -->총 25개직업군으로 분류한 코드(사고 당시)'
+,CHANG_FP_YN CHAR(1) COMMENT'FP 변경 여부 -->모집 FP와 청구 당시 수금 FP 와의 동일 여부'
+,CNTT_RECP_SQNO VARCHAR(100)  COMMENT'계약별접수일련번호  -->사고접수에 대해 해당 계약건별로 부여하는 번호'
+,RECP_DATE CHAR(8) COMMENT'사고접수일자  -->사고가 접수된 일자'
+,ORIG_RESN_DATE CHAR(8) COMMENT'원사유일자  -->사고접수시 해당 사고의 최초 사유발생일자 '
+,RESN_DATE CHAR(8) COMMENT'사유일자  -->보험금 지급사유 발생일자'
+,CRNT_PROG_DVSN NUMERIC COMMENT'현재진행구분  -->현재진행구분 상태 구분  - 접수(11), 심사배정(21), 심사(22), 심사결재(23), 조사(32), 조사결재(33)'
+,ACCI_DVSN CHAR(1) COMMENT'사고구분  -->사고원인을 구분함 - 재해(1), 교통재해(2), 질병(3)'
+,CAUS_CODE CHAR(3) COMMENT'원인코드  -->사고의 원인에 해당하는 사인코드 '
+,CAUS_CODE_DTAL CHAR(5) COMMENT'원인코드상세  -->사고의 원인에 해당하는 사인코드_상세정보'
+,DSAS_NAME VARCHAR(50) COMMENT'병명 -->병명'
+,DMND_RESN_CODE CHAR(2) COMMENT '청구사유코드  -->지급청구의 원인이 되는 사유코드  - 사망(01), 입원(02), 통원(03), 장해(04), 수술(05), 진단(06), 치료(07), 해지/무효(09)'
+,DMND_RSCD_SQNO NUMERIC COMMENT'청구사유코드일련번호 -->동일 증번, 동일한 청구사유이지만 사유일자가 다른 경우 일련번호를 1씩 증가시킴. '
+,HOSP_OTPA_STDT CHAR(8) COMMENT'입원/통원시작일자  -->입원시작일, 통원은 통원시작일 (입원은 무조건 연속된일자만 관리됨)'
+,HOSP_OTPA_ENDT CHAR(8) COMMENT'입원/통원종료일자  -->입원종료일, 통원은 통원종료일  '
+,RESL_CD1 CHAR(3) COMMENT'결과코드1  -->사고원인에 대한 결과코드'
+,RESL_NM1 VARCHAR(100) COMMENT'결과명1(사인내용)  -->결과내용'
+,VLID_HOSP_OTDA NUMERIC COMMENT'유효입원/통원일수  -->보험금지급대상인 입원일수 또는 통원일수  '
+,HOUSE_HOSP_DIST NUMERIC COMMENT'고객병원거리  -->고객 거주지와 병원까지의 거리(km)'
+,HOSP_CODE NUMERIC COMMENT'병원코드  -->병원코드'
+,ACCI_HOSP_ADDR VARCHAR(100) COMMENT'병원지역(시도)  -->병원지역'
+,HOSP_SPEC_DVSN CHAR(2)  COMMENT'병원종별구분  -->병원종별구분 - 종합병원(10), 병원(20), 요양병원(25), 의원(30), 치과병원(40), 치과의원(45), 보건의료원(60),  약국(70), 한방병원(80), 한의원(85), 해외(90), 의료기관이외(95)'
+,CHME_LICE_NO NUMERIC COMMENT'담당의사면허번호  -->의사면허번호'
+,PAYM_DATE CHAR(8) COMMENT'지급일자  -->보험금 지급일자'
+,DMND_AMT NUMERIC COMMENT'청구금액 -->사고보험금청구금액  '
+,PAYM_AMT NUMERIC COMMENT'지급금액(지급테이블)  -->실지급금액  '
+,PMMI_DLNG_YN CHAR(1) COMMENT'실손처리여부  -->실손처리여부'
+,SELF_CHAM NUMERIC COMMENT'본인부담금  -->국민건강보험 적용 금액 중 환자 부담 금액'
+,NON_PAY NUMERIC COMMENT'비급여  -->국민건강보험 미적용 금액'
+,TAMT_SFCA NUMERIC COMMENT'전액본인부담금  -->국민건강보험 미적용 금액'
+,PATT_CHRG_TOTA NUMERIC COMMENT'환자부담총액  -->본인부담금 + 비급여 + 전액본인부담금 '
+,DSCT_AMT NUMERIC COMMENT'영수할인금액  -->병원에서 할인해주는 비용'
+,COUNT_TRMT_ITEM NUMERIC COMMENT'진료과목개수 -->실손영수증 내 진료과목의 개수'
+,NON_PAY_RATIO NUMERIC COMMENT'실손비급여비율 -->(비급여 + 전액본인부담금) / (환자부담총액) = (비급여 + 전액본인부담금) / (본인부담금 + 비급여 + 전액본인부담금)'
+,HEED_HOSP_YN CHAR(50) COMMENT'유의병원여부  -->금감원 유의 병원 대상 여부'
+)
+
+
+# so what?
+
+병명 결과 코드 앞의 알파벳으로 범주 분류가 가능하다.
+ -> S M C 등 코드로 시작하는 사기자의 비율을 보자?
+ (외부 물리적인 힘으로 인한..)
+
+
+ 희귀 병명 파생변수는 어떻게 만드는가??
+
+
+
+
+가족테이블에서 사기건수가 216건 발견
+select a.SIU_CUST_YN, count(*) from cust a,
+(
+select cust_id from fmly
+UNION 
+select sub_cust_id cust_id from fmly
+) b
+where a.cust_id = b.cust_id
+group by a.SIU_CUST_YN
+
+
+검증해볼 것 ( 최근 2주간 의견 취합)
+ ** 병도님 의견 :: 보험금  총합계보험료 대비 보험금청구금액이 높다라는건??
+ ** 슈영님 의견 :: 보험료 납부기간 1년 이내... 사기 발생 가능성 높아짐 
+ ** 월소득금액 대비 월보험료 지불 비율이 유의한가 살펴볼것?
+ ** 파생변수 생성 
+  		- 일시납, 주기납 구분 변수 
+  		- 한달 보험료, 월소득금액대비 한달 보험료 비율??
+ ** 보험사 추정소득금액 
+ ** 보험료 납부기간 1내 이내 사기 발생 가능성이 높다?
+ ** 사기자 네트워크 분석?!
+    -> 쌩고생중 왜 이리 잘안된다냐..
+
+ ** 납입한 보험금대비 보상금이 많은 경우 사기꾼?
+
+ ** 추정가구 소득 다시 돌려보기?
+ 
+ ** 종신여부 	만기년월 999912
+ 
+ ** 실지급금액 과다 병원 
+ 
+ ** 피보험자-수익자 동일여부	YN
+ 
+ ** FP 지점별사기자판정인원
+ 
+ ** 고객별동반가족인원 ??
+ 
+ ** 증권번호별클래임건수 ??
+
+
+
+
+## 소상공인 포털
+1. http://www.sbiz.or.kr/sup/main.do
+2. RPubs 퍼블리쉬할려고 하나 문제가 있네..
+3.
