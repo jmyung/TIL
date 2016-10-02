@@ -1,0 +1,10 @@
+옥수수님 발표
+** claim, cust, cntt 조합해서 66만건의 데이터 중 50만건은 train 10만건은 validatoin
+** cntt엔 있는데 claim에 없어도 
+** 사기자들의 cntt를 확인하고 claim을 확인하고 cntt에 대한 contract 개수 및 frequency 에 대한 파생변수를 만드는거.
+** 병명을 찾아서 그거를 contract / claim의 범위를 줄이자
+** 사기자가 다닌 병원들이 달라지는 경우도 찾아보자
+** 여러개의 claim의 경우 동일한의사에게 claim 접수한 카운트
+
+** 이제 돌려보자
+cust기준으로 기존변수 / 파생변수 쭉 뽑아보자!!
