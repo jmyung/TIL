@@ -1,0 +1,75 @@
+# 2016년 선데이스터디 워크샵(해커톤 in 카라쉬 관광호텔)
+
+ 목표 달성은 얼추 한듯.  내가 작업한 내용 공유하자면.
+
+## Apache Hadoop / Spark / Hive 설치 (윈도우10)
+
+1. Apache Hadoop 설치 
+아래 링크 참고하여 설치
+ - http://cdecl.tistory.com/307 
+ - http://wiki.apache.org/hadoop/Hadoop2OnWindows
+ 위의 두 링크 참조해서 yarn과 hadoop을 실행하면 4개의 인스턴스가 실행이 되고 아래와 같이 3개의 페이제에서 하둡 모니터링 및 데이터를 확인가능. 
+ 	. http://localhost:8042 - Resource Manager and Node Manager : 
+    . http://localhost:50070 - Namenode 
+  	. http://localhost:9000 - Service URI
+
+
+2. Apache Spark 설치 
+윈도우7 or 10에서 spark 설치의 경우 classpath잡는것이 관건인데. 아래 링크에서처럼 trouble shooting으로 시간 소모가 컸음
+http://stackoverflow.com/questions/39943628/the-difference-between-a-hadoop-installed-by-standalone-and-a-hadoop-included-in
+공식 메뉴얼에는 linux  위주로만 설명이 있어서였고.  별도로 classpath를  "hdfs classpath" 라는 커맨드를 실행해서 나온 결과를 conf/spark-env.cmd를 별도로 만들어서
+환경변수 SPARK_DIST_CLASSPATH에 set해주어야 한다. 별도로 commandline에서 하면 또 안됨.
+
+*참고 사이트 
+Python HDFS libraries 5가지 정도의 장단점 비교가 아주 잘되어 있음. http://pythonhosted.org/mrjob/index.html
+
+3. Apache Hive 설치
+
+공식페이지에서 바로 다운로드 받아서 실행하면 에러. 아래와 같은 추가 절차가 필요하다.
+3.1. 우선 기생할 공간을 hadoop fs로 만들어야 하고.
+%HADOOP_HOME%/bin/hadoop fs -mkdir       /tmp
+%HADOOP_HOME%/bin/hadoop fs -mkdir       /user/hive/warehouse  (여기는 하나씩 해야한다. 리눅스에서와는 다르게 한꺼번에 못만들어서 No such a directory라고 에러)
+%HADOOP_HOME%/bin/hadoop fs -chmod g+w   /tmp
+%HADOOP_HOME%/bin/hadoop fs -chmod g+w   /user/hive/warehouse
+
+3.2.바로 그다음으로, 더비 다운로드 및 실행하여 server 기동해야함. (meta db로 사용)
+
+3.3. HIVE_LIB HIVE_BIN_PATH를 HIVE_HOME외에도 따로 환경변수 셋팅을 해줘야하낟.
+
+3.4. schemaTool.cmd -dbType derby -initSchema -> 이것 또한 왜 안되는지 모르겠다. cmd는 찾아도 없고 그래서 한것은 어느 유투브에 올라온 설치 영상을 보고 겨우 해결했는데,
+conf/hive-site.xml의 파일을 만들어서 거기에 configuration 태그 하위에 아래와 같이 추가해야한다.
+	<property>
+	  <name>javax.jdo.option.ConnectionURL</name>
+	  <value>jdbc:derby://localhost:1527/metastore_db;create=true</value>
+	  <description>JDBC connect string for a JDBC metastore</description>
+	</property>
+
+	<property>
+	  <name>javax.jdo.option.ConnectionDriverName</name>
+	  <value>org.apache.derby.jdbc.ClientDriver</value>
+	  <description>Driver class name for a JDBC metastore</description>
+	</property>
+
+	<property>
+	  <name>datanucleus.schema.autoCreateAll</name>
+	  <value>true</value>
+	</property>
+
+이로써, 우선 하둡 에코시스템은 구성을 어느정도 했고, 그다음으로 대량의 데이터를 생산할 크롤러들을 만들어야 하는데..  승호가 많이 치고 나가줬다.
+
+#크롤링의 경우
+
+아파트 청액 경쟁률의 경우는 우선 승호가 먼저 치고 나감
+ - chrome dev에서 별도의 redirect 구간을 Network탭에서 각각 별도로 일어나는 것에 대한 것을 개별적으로 보고 그 각각이 가져온 response data도 확인이 가능하다.
+ - 그리고 함수를 통해서 호출하였을 경우 바로 그 곳 console에서 그 함수이름으로 구현부 확인이 가능하다. 
+ - TableParser는 재활용하면 좋을 것 같음.
+ - github에 공유된 web crawling소스를 참고해서 아래 3가지의 추가 크롤러 작성 필요 (TODO)
+
+우선 세가지의 정보를 가지고 오기로 함.
+ 1. 서울시 서초구 잠원동의 아파트 목록을 가져옴 -> 아파트 대장 
+ 2. 아래의 주소에서 보증금/월세와 시세 정보를 가져옴 
+ 	http://land.naver.com/article/articleDetailInfo.nhn?atclNo=1609936747&atclRletTypeCd=A01&rletTypeCd=A01&tradeTypeCd=B2
+ 3. 아래의 주소에서 모든 페이지를 탐색하여 매물 정보를 가져옴. 매매/전세/월세를 나누어서 count up을 한다.  거래완료는 스킵할 것이며, 현재 시점에서 매물 대상인것들 count up이 목표
+    http://land.naver.com/article/articleList.nhn?rletTypeCd=A01&tradeTypeCd=&hscpTypeCd=&cortarNo=1165010600&mapLevel=10
+
+#Scarpy의 경우는 webchat.freenode.net 의 scrapy 채널에서 확인하자(http://webchat.freenode.net/?channels=scrapy)
