@@ -1,0 +1,28 @@
+************************************************************************
+장기천 박사
+
+[저서] 2016, R언어로 짜는 금융프로그래밍
+[저서] 2008, 엑셀 VBA를 이용한 금융공학실습
+
+북극성주님의 글들
+http://m.post.naver.com/my.nhn?memberNo=28198902
+
+
+************************************************************************
+싸이그래머라는 스터디그룹이 있는데 2015년 초반에 하다가 그친듯. 
+
+2월에는 김승욱님의 캐글의  바이크 수요 예측하는것. 
+
+3월에는 이상열님의 재구매 예측하는 컴피티션에서 상위 10% 랭킹되었던 소스를 공유했다고 한다. 와우!!
+https://github.com/auduno/Kaggle-Acquire-Valued-Shoppers-Challenge
+후기를 발췌하자면,, 데이터의 전처리와 변형, 그리고 traing, validation, test데이터로 분류하여 모델을 학습시키는 방법과 분류기를 선택하는 방법, 6가지 분류기(Extra tree, Tree boosters, SGD SVM logistic and linear, Quantile regression, Linear boosters)로 분류를 한다음 6가지 분류기의 결과를 하나로 합치는 앙상블(ensemble)방법에 대해서 자세히 설명해주셨습니다.
+
+그리고 4월에는 김승욱님이 Learning to rank hotels to maximize purchases의 컴피티션 소개
+
+
+
+아래는 올해 꼭 할 것.
+* ADsP 자격증 취득
+* Coursera certificate 자격증 취득할 것
+
+
