@@ -1,0 +1,35 @@
+작업표류(~14)와 파이썬으로 풀어보는 수학(~04)의 경우는 곧 반납필요
+
+10시 출근 4시퇴근 예정 (5시간 근무 3시간 채워, 40분 남음, 목요일 7시 출근 4시 금요일도 7시 출근하면 어찌 될까..?)
+DG 모임 
+아파치 제플린 고려해볼것
+엘라스틱은 미리 선행 학습해볼것.
+그리고 슬랙에서 analyticsvidhya.com 채널에서 활동을 본격적으로 해보자.
+
+# TODO 
+1. github.io에 블로그 만들기
+2. apache spark 로 해서 ml 문제 한번 tutorial 따라하고 cutting edge t/f원들에게 전파내용 일정 공유(목 ~ 금)
+	. http://www.kdnuggets.com/2016/09/7-steps-mastering-apache-spark.html
+	. http://www.kdnuggets.com/2016/08/10-algorithms-machine-learning-engineers.html
+	. 
+3. ss에서 크롤링 에이전트 3개 개발 및 python <-> hive 연동 skeleton code 작성
+4. github.io에 데이터 사이언티스트 필요 역량 공유 및 ADsP자격증 취득 준비에 대해서 다루기( 카톡방도 확인)
+
+
+오늘의 데이터사이언스 공부를 해보자.
+
+1. 우선 오늘 온것은 에플 데이터과학자 구직 내용인데 필요 조건(Key Qualifications)이 다음과 같다. 어느정도 자신감이 붙는데??
+Expertise working with Big Data (Spark, Hadoop, Pig/Hive) tools and frameworks
+Strong programming skills in Scala, Java, Python and/or SQL
+Strong facility with R, Matlab, SAS or similar
+Experience in segmentation, clustering, regression, applied machine learning, and other data mining
+Self-motivated, curious and proactive, with demonstrated creative and critical thinking capabilities and an innate drive to improve how things work
+Excellent communications and presentation skills
+3-5 year of experience in an analytics role
+라쿠텐 https://jobs.rakuten.careers/careersection/rakuten_ext_cs/jobdetail.ftl?job=00002542
+
+
+2. 이번에는 AnalyticsVidhya에서 랭킹 4위에 드는 Rohan Rao라는 분의 블로그. 글이 많이 올라온다. 그리고 실제로 본인이 푼 Kaggle or AnalyticsVidhya의 컴티피션 솔루션도 구경하는것도 또하나의 재미가 될듯!! 주소는 http://rohanrao91.blogspot.kr/ 특히 이 블로그를 보면서 알게 되었는데 이미 해커톤이 매주 열린다고. https://datahack.analyticsvidhya.com/contest/all/ 여기 가서 한번 참가해보는것도!!
+
+3.
+
