@@ -1,0 +1,363 @@
+Kaggle에서 올라온 문제를 가지고 부동산 가격 예측 문제 
+- Iowa주의 Ames 도시의 부동산 가격을 예측
+- 79개의 중요 변수들을 제공
+
+
+LotFrontAge
+
+Street 의 경우 자갈일 경우는 비싼게 없다 pave는 다양하게 걸쳐져 있다
+Alley(골목)도 마찬가지로 pave 가  Gravel보다 높은 가격을 대체적으로 형성
+Lotshape의 경우은 IR 시리즈보다 가격이 Reg로 된 집이 좀 낮다
+LandContour도 마찬가지로 가격이 타입별로 다르게 형성
+Utilities는  AllPubs가 가격범위가 크고 NoSeWa는 거의 1.5? 고정
+NeighborHood는 확실히 동네가 어디인지에 따라 가격대가 다르게 형성
+YearBuilt 확실히 오래된 아파트는 비싼게 없군
+HouseStyle 1층과 2층짜리 집이 가격이 높게 형성
+OverallQual 당연히 품질이 좋을수록 집이 비쌈
+OverallCond 5인 경우에는 가격 범위가 전체에 걸쳐 있다는게 이상 나머지는 정상대로 비례관계
+YearRemoteAdd 리모델링 날짜를 말하는 것으로써, 당연히 최근일수록 비싸나 생각보다 그리 비례비가 높지 않고 또 아래 박스권에 대부분 몰려 있음
+
+
+RoofStyle: Type of roof , 그닥 차이가 없음 Hip이 그나마 가격이 좀 높은 정도? 차이가 그리 없음.
+       Flat	Flat
+       Gable	Gable
+       Gambrel	Gabrel (Barn)
+       Hip	Hip
+       Mansard	Mansard
+       Shed	Shed
+
+		
+RoofMatl: Roof material, Wood Shingles이 가격이 쌔고, Gravel & Tar / Wood Shakes 이 그다음 가격대 그리고 Membrane, Metal, Roll의 경우는 집 가격대가 아주 좁게 형성되어있는점이 특이!!
+
+       ClyTile	Clay or Tile
+       CompShg	Standard (Composite) Shingle
+       Membran	Membrane
+       Metal	Metal
+       Roll	Roll
+       Tar&Grv	Gravel & Tar
+       WdShake	Wood Shakes
+       WdShngl	Wood Shingles
+		
+Exterior1st: Exterior covering on house , 집 외부 마감재가 뭐에 따라 다르다. PreCast, Vinyl Siding 같은 경우는 비싼편 
+
+       AsbShng	Asbestos Shingles
+       AsphShn	Asphalt Shingles
+       BrkComm	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       CemntBd	Cement Board
+       HdBoard	Hard Board
+       ImStucc	Imitation Stucco
+       MetalSd	Metal Siding
+       Other	Other
+       Plywood	Plywood
+       PreCast	PreCast	
+       Stone	Stone
+       Stucco	Stucco
+       VinylSd	Vinyl Siding
+       Wd Sdng	Wood Siding
+       WdShing	Wood Shingles
+	
+Exterior2nd: Exterior covering on house (if more than one material) 가격이 위와 비슷 
+
+       AsbShng	Asbestos Shingles
+       AsphShn	Asphalt Shingles
+       BrkComm	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       CemntBd	Cement Board
+       HdBoard	Hard Board
+       ImStucc	Imitation Stucco
+       MetalSd	Metal Siding
+       Other	Other
+       Plywood	Plywood
+       PreCast	PreCast
+       Stone	Stone
+       Stucco	Stucco
+       VinylSd	Vinyl Siding
+       Wd Sdng	Wood Siding
+       WdShing	Wood Shingles
+	
+MasVnrType: Masonry veneer type  Stone > Brick Face > Brick Common, None
+
+       BrkCmn	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       None	None
+       Stone	Stone
+	
+MasVnrArea: Masonry veneer area in square feet  관계성이 생각보다 너무 없다.ㄷ
+
+ExterQual: Evaluates the quality of the material on the exterior, Excellent가 최고
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+ExterCond: Evaluates the present condition of the material on the exterior, Excellent > Average/Typical 순으로 높다
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+Foundation: Type of foundation ,  Poured Contrete, Stone, Wood가 높다 
+		
+       BrkTil	Brick & Tile
+       CBlock	Cinder Block
+       PConc	Poured Contrete	
+       Slab	Slab
+       Stone	Stone
+       Wood	Wood
+		
+BsmtQual: Evaluates the height of the basement  높이가 높을수록 퀄리티가 높은가 봄.
+
+       Ex	Excellent (100+ inches)	
+       Gd	Good (90-99 inches)
+       TA	Typical (80-89 inches)
+       Fa	Fair (70-79 inches)
+       Po	Poor (<70 inches
+       NA	No Basement
+		
+BsmtCond: Evaluates the general condition of the basement ,  Excellent가 빠져있고 마찬가지!
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical - slight dampness allowed
+       Fa	Fair - dampness or some cracking or settling
+       Po	Poor - Severe cracking, settling, or wetness
+       NA	No Basement
+	
+BsmtExposure: Refers to walkout or garden level walls ,  walkout은 외부로 연결된 집안의 통로를 말하는 것으로, 이것도 집 가격이 가겨갣가 별도로 형성된다ㅣ
+
+       Gd	Good Exposure
+       Av	Average Exposure (split levels or foyers typically score average or above)	
+       Mn	Mimimum Exposure
+       No	No Exposure
+       NA	No Basement
+	
+BsmtFinType1: Rating of basement finished area  이것도 마찬가지로 지하실 상태를 나타내는 거 같음. 
+
+       GLQ	Good Living Quarters
+       ALQ	Average Living Quarters
+       BLQ	Below Average Living Quarters	
+       Rec	Average Rec Room
+       LwQ	Low Quality
+       Unf	Unfinshed
+       NA	No Basement
+		
+BsmtFinSF1: Type 1 finished square feet, 비례관계
+
+BsmtFinType2: Rating of basement finished area (if multiple types), 그닥 관계성이 없다능. 
+
+       GLQ	Good Living Quarters
+       ALQ	Average Living Quarters
+       BLQ	Below Average Living Quarters	
+       Rec	Average Rec Room
+       LwQ	Low Quality
+       Unf	Unfinshed
+       NA	No Basement
+
+BsmtFinSF2: Type 2 finished square feet, 이것도 마찬가지 그리 관계가 없다.
+
+BsmtUnfSF: Unfinished square feet of basement area, 관계 없다.
+
+TotalBsmtSF: Total square feet of basement area, 비례관계
+
+Heating: Type of heating,  이거는 가스가 높은 집값을 보증해준다는거 GasA, GasW가 둘다 상위권
+		
+       Floor	Floor Furnace
+       GasA	Gas forced warm air furnace
+       GasW	Gas hot water or steam heat
+       Grav	Gravity furnace	
+       OthW	Hot water or steam heat other than gas
+       Wall	Wall furnace
+		
+HeatingQC: Heating quality and condition, 이것 또한 상태가 좋은게 집값 결정이 영향을 미침. 
+
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+CentralAir: Central air conditioning 중앙냉방이 있으면 가격이 쎄다
+
+       N	No
+       Y	Yes
+		
+Electrical: Electrical system  SBrkr > FuseA > FuseF > FuseP > Mix
+
+       SBrkr	Standard Circuit Breakers & Romex
+       FuseA	Fuse Box over 60 AMP and all Romex wiring (Average)	
+       FuseF	60 AMP Fuse Box and mostly Romex wiring (Fair)
+       FuseP	60 AMP Fuse Box and mostly knob & tube wiring (poor)
+       Mix	Mixed
+		
+1stFlrSF: First Floor square feet , 비례관계
+ 
+2ndFlrSF: Second floor square feet 2층이 없는거 제외하고 비례관계
+
+LowQualFinSF: Low quality finished square feet (all floors) , 영향 없음
+
+GrLivArea: Above grade (ground) living area square feet  비례관계 
+
+BsmtFullBath: Basement full bathrooms, 개수가 증가할수록 가격 범위 시작가격이 조금 올라가나 영향은 없다고 볼 수 있음
+
+BsmtHalfBath: Basement half bathrooms, 개수가 증가할수록 가격 범위 시작가격이 조금 올라가나 영향은 없다고 볼 수 있음
+
+FullBath: Full bathrooms above grade, 개수가 증가할수록 가격 범위 시작가격이 조금 올라가나 영향은 없다고 볼 수 있음
+
+HalfBath: Half baths above grade, 개수가 증가할수록 가격 범위 시작가격이 조금 올라가나 영향은 없다고 볼 수 있음
+
+Bedroom: Bedrooms above grade (does NOT include basement bedrooms) ??
+
+Kitchen: Kitchens above grade ??
+
+KitchenQual: Kitchen quality, 마찬가지 비례
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       	
+TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)  살짝 비례관계???! 
+
+Functional: Home functionality (Assume typical unless deductions are warranted)
+
+       Typ	Typical Functionality
+       Min1	Minor Deductions 1
+       Min2	Minor Deductions 2
+       Mod	Moderate Deductions
+       Maj1	Major Deductions 1
+       Maj2	Major Deductions 2
+       Sev	Severely Damaged
+       Sal	Salvage only
+		
+Fireplaces: Number of fireplaces
+
+FireplaceQu: Fireplace quality, 이것도 비례관계
+
+       Ex	Excellent - Exceptional Masonry Fireplace
+       Gd	Good - Masonry Fireplace in main level
+       TA	Average - Prefabricated Fireplace in main living area or Masonry Fireplace in basement
+       Fa	Fair - Prefabricated Fireplace in basement
+       Po	Poor - Ben Franklin Stove
+       NA	No Fireplace
+		
+GarageType: Garage location, BuiltIn, Attchd 가 비싸다.
+		
+       2Types	More than one type of garage
+       Attchd	Attached to home
+       Basment	Basement Garage
+       BuiltIn	Built-In (Garage part of house - typically has room above garage)
+       CarPort	Car Port
+       Detchd	Detached from home
+       NA	No Garage
+		
+GarageYrBlt: Year garage was built , 창고가 지어진 년도도 최근게 당연히 비쌈
+
+		
+GarageFinish: Interior finish of the garage, 비례관계  Fin > RFn > Unf
+
+       Fin	Finished
+       RFn	Rough Finished	
+       Unf	Unfinished
+       NA	No Garage
+		
+GarageCars: Size of garage in car capacity, 이것도 비례관계가 구성이 될 듯. 차대수가 많을수록 가격 범위가 점점 올라간다. 
+
+GarageArea: Size of garage in square feet, 800 square feet까지는 맞으나 그뒤로는 비례관계가 깨진다.
+
+GarageQual: Garage quality, 가격에 영향이 없다. Ex = Gd가 같다. 
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       NA	No Garage
+		
+GarageCond: Garage condition, 유의하지 않다. 오히려 Excellent가 Good보다 집 가격이 못하다.
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       NA	No Garage
+		
+PavedDrive: Paved driveway 포장일수록 가격이 높다. Y > P > N
+
+       Y	Paved 
+       P	Partial Pavement
+       N	Dirt/Gravel
+		
+WoodDeckSF: Wood deck area in square feet , 약간 비례관계, 400 square feet이후는 데이터가 별로 없다.
+
+OpenPorchSF: Open porch area in square feet , 200 square feet 이후에는 데이터가 별로 없다. 
+
+EnclosedPorch: Enclosed porch area in square feet, 유의하지 않다. 
+
+3SsnPorch: Three season porch area in square feet, 데이터가 별로 없다.
+
+ScreenPorch: Screen porch area in square feet, 데이터가 별로 없어 유의한지 판단하기 어렵다.
+
+PoolArea: Pool area in square feet 데이터가 너무 없어 유의한지 판단하기 어렵다.
+
+PoolQC: Pool quality, Excellent같은 경우 확실히 가격대가 높고 Gd가 오히려 Fa보다 가격이 낮아 유의할지 의문
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       NA	No Pool
+		
+Fence: Fence quality, Good Privacy는 높으나 나머지가 비교하기 어려울듯, GdPrv와 나머지로 분류해서 categorical factor로 만들지 고민
+		
+       GdPrv	Good Privacy
+       MnPrv	Minimum Privacy
+       GdWo	Good Wood
+       MnWw	Minimum Wood/Wire
+       NA	No Fence
+	
+MiscFeature: Miscellaneous feature not covered in other categories, Tennis Court가 있음 비쌈 , 창고가 하나 더있어도 비쌈.
+		
+       Elev	Elevator
+       Gar2	2nd Garage (if not described in garage section)
+       Othr	Other
+       Shed	Shed (over 100 SF)
+       TenC	Tennis Court
+       NA	None
+		
+MiscVal: $Value of miscellaneous feature, 데이터도 별로 없음, 유의하지 않음
+
+MoSold: Month Sold (MM)   3,4,7이 더 높은 판매가격을 자랑함.
+
+YrSold: Year Sold (YYYY) 유의하지 않으며 매년 비슷한 모습
+
+SaleType: Type of sale, New와  Con이 시세가 비싸 보이며, 나머지는 비슷
+		
+       WD 	Warranty Deed - Conventional
+       CWD	Warranty Deed - Cash
+       VWD	Warranty Deed - VA Loan
+       New	Home just constructed and sold
+       COD	Court Officer Deed/Estate
+       Con	Contract 15% Down payment regular terms
+       ConLw	Contract Low Down payment and low interest
+       ConLI	Contract Low Interest
+       ConLD	Contract Low Down
+       Oth	Other
+		
+SaleCondition: Condition of sale, Partical이 가격대가 높아 보인다.
+
+       Normal	Normal Sale
+       Abnorml	Abnormal Sale -  trade, foreclosure, short sale
+       AdjLand	Adjoining Land Purchase
+       Alloca	Allocation - two linked properties with separate deeds, typically condo with a garage unit	
+       Family	Sale between family members
+       Partial	Home was not completed when last assessed (associated with New Homes)
