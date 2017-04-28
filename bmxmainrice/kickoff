@@ -1,0 +1,22 @@
+Architecture 수립
+Resiliency 수립
+
+** 공부할 자료 한곳에 모아서 관리
+ . 
+
+역할 정의
+ . 블루믹스 환경/런타임 구성
+   . Apache Spark, MongoDB(명책임님), Python Flask BuildPack,  Batch Program, 
+ . 계정 간 이동 마이그레이션/형상 관리 수립
+ . 파이선 개발자 
+   - 웹 크롤링
+   - 데이터 분석 API 활용
+ . NoSQL/SQL 모델링 및 DA/표준 수립
+ . 2주 단위로 교육 하나씩 진행 예정
+    -> 파이선 웹 스크롤링 강의 (조억)
+    -> NoSQL 모델링(명책임님)
+ . 웹미나 진행 리더 한달 단위로 변경
+ . 화면 설계
+ . Flask 개발 
+ . 주식 메터 데이터 공개
+ . 노드레드 이용하여 Twitter Sentimental Analysis

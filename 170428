@@ -1,0 +1,31 @@
+# TODO
+
+JAVA_HOME 확인 및 위의 compiler-plugin 추가 및 Jenkins의 JAVA를 명시적으로  8.0으로 지정 필요
+
+
+
+
+
+
+
+# Spark Summit 2016 Hands On - Movie Recommendation with MLlib
+https://databricks-training.s3.amazonaws.com/movie-recommendation-with-mllib.html
+--> Bluemix 에서 돌려볼 것
+---> 텐서 플로우도 시간 나면 돌려봐야 하는데 지원 소식은 들었으나 컨테이너에 올려서 하는 식이 될려나?
+
+
+
+
+### GEP 준비
+우선 Deep Learning From a Scratch 공부하고 아래 마인드셋 보고 공부 계획을 수립하자
+https://www.mindmeister.com/ko/812276967/_
+
+Conetextual Multi Armed Bandit
+https://www.youtube.com/watch?v=vz3D36VXefI&t=5s
+
+텐서플로우 이거 보고 무조건 투토리얼 돌려볼것
+https://github.com/golbin/TensorFlow-Tutorials
+
+cs231n 시도도 해볼것
+https://github.com/aikorea/cs231n
+
